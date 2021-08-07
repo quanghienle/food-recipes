@@ -1,36 +1,37 @@
 // server/index.js
+import './init.js';
 
-const express = require("express");
+import express from "express";
 
-const PORT = process.env.PORT || 3001;
+import { dbTable } from './constants.js';
+import {queryPromise} from './db_helper.js';
+
 
 const app = express();
 
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '****',
-  database: 'recipes'
-});
-
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to MySQL Server!');
-});
-
 app.get("/recipes",(req,res) => {
-    connection.query('SELECT * from recipes LIMIT 10', (err, rows) => {
-        if(err) throw err;
-        res.json(rows);
-        connection.end();
-    });
+    const queryString = 'SELECT * FROM ?? LIMIT 5';    
+    const queryVars = [dbTable.recipes];
+    queryPromise(queryString, queryVars)
+        .then((rows) => {
+            res.json(rows);
+        }).catch( (err) => {
+            console.error(err);
+        });
 });
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+app.get("/", (req, res) => {
+  res.json("Hello from server!");
 });
+
+
+const PORT = process.env.SERVER_PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Server listening on ${process.env.SERVER_PORT || 3001}`);
+});
+
