@@ -1,0 +1,24 @@
+{
+  "name": "food-recipes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quanghienle/food-recipes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quanghienle/food-recipes/issues"
+  },
+  "homepage": "https://github.com/quanghienle/food-recipes#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
