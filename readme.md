@@ -1,6 +1,6 @@
 
 # instructions
-- to run server: `npm start`
-- to run client: `cd client && npm start`
+- to run server: `npm install && npm start`
+- to run client: `cd client && npm install && npm start`
 
 
