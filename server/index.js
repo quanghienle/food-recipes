@@ -10,7 +10,7 @@ import {queryPromise} from './db_helper.js';
 const app = express();
 
 app.get("/recipes",(req,res) => {
-    const queryString = 'SELECT * FROM ?? LIMIT 5';    
+    const queryString = 'SELECT * FROM ?? LIMIT 10';    
     const queryVars = [dbTable.recipes];
     queryPromise(queryString, queryVars)
         .then((rows) => {

@@ -1,22 +1,43 @@
-import logo from "./logo.svg";
 import React from "react";
-import "./App.css";
+import Box from "@mui/material/Box";
+import RecipeCard from "./components/RecipeCard";
 
 function App() {
-  const [data, setData] = React.useState(null);
+  const [recipes, setRecipes] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("/api")
+    fetch("/recipes")
       .then((res) => res.json())
-      .then((data) => setData(data.message));
+      .then((data) => {
+        console.log(data);
+        setRecipes(data);
+      });
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+    <div style={{ width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: "row",
+          p: 1,
+          m: 1,
+          bgcolor: "background.paper",
+        }}
+      >
+        {recipes.map((recipe) => (
+          <Box sx={{ p: 1, flexGrow: 1 }} key={`recipe-preview-${recipe.id}`}>
+            <RecipeCard
+              title={recipe.name}
+              imagePath={"./images/recipe-placeholder.png"}
+              timestamp={recipe.submitted}
+              description={recipe.description}
+              steps={recipe.steps}
+            />
+          </Box>
+        ))}
+      </Box>
     </div>
   );
 }

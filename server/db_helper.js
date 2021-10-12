@@ -11,4 +11,6 @@ function queryPromise(queryString, queryVars=[]) {
     });
 };
 
+console.log(dbPool);
+
 export {queryPromise};
