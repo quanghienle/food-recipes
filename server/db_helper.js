@@ -6,11 +6,9 @@ function queryPromise(queryString, queryVars=[]) {
                 if(err) return reject(err);
                 resolve(rows);
             })
-          connection.release();
+        connection.release();
         });
     });
 };
-
-console.log(dbPool);
 
 export {queryPromise};
