@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import {Paper, Grid} from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -12,9 +12,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function RecipeDetail(){
     const [recipeData, setRecipeData] = React.useState({});
+    const { id } = useParams();
 
     React.useEffect(() => {
-        fetch("/recipe?id=38")
+        fetch(`/recipe?id=${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setRecipeData(data);
