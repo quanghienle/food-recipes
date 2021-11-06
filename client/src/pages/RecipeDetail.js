@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from '@mui/material/styles';
-import {Paper, Grid} from '@mui/material';
+import { Paper, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -10,7 +10,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export default function RecipeDetail(){
+export default function RecipeDetail() {
     const [recipeData, setRecipeData] = React.useState({});
     const { id } = useParams();
 
@@ -21,13 +21,13 @@ export default function RecipeDetail(){
                 setRecipeData(data);
                 console.log(data);
             })
-    },[]);
+    }, []);
 
 
-    return(
+    return (
         <Grid container spacing={2}>
             <Grid item xs={8}>
-                <Item>xs=8</Item>
+                <Item>item1</Item>
             </Grid>
             <Grid item xs={4}>
                 <Item>xs=4</Item>
@@ -37,7 +37,8 @@ export default function RecipeDetail(){
             </Grid>
             <Grid item xs={8}>
                 <Item>xs=8</Item>
-                </Grid>
+            </Grid>
         </Grid>
     )
 }
+

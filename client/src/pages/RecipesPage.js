@@ -32,7 +32,6 @@ export default function RecipesPage() {
             <RecipeCard
               title={recipe.name}
               imagePath={"./images/recipe-placeholder.png"}
-              timestamp={recipe.submitted}
               description={recipe.description}
               steps={recipe.steps}
             />
