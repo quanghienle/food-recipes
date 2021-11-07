@@ -36,9 +36,9 @@ export default function Home(){
                     <Item>
                         <h1>Top rated recipes</h1>
                         {topRatedRecipes.map(recipe => (
-                            <Link to={`/recipe/${recipe.id}`}>
+                            <Box key={recipe.id}>
                                 <RecipeCard recipe={recipe} />
-                            </Link>
+                            </Box>
                         ))}
                     </Item>
                 </Grid>
