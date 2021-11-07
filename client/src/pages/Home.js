@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Home(){
     const [topRatedRecipes, setTopRecipes] = React.useState([]);
     React.useEffect(() => {
-        fetch('/home')
+        fetch('/recipes')
         .then(res => res.json())
         .then(data => {
             setTopRecipes(data);
@@ -37,7 +37,14 @@ export default function Home(){
                         <h1>Top rated recipes</h1>
                         {topRatedRecipes.map(recipe => (
                             <Box key={recipe.id}>
-                                <RecipeCard recipe={recipe} />
+                                  <Link to={`/recipe/${recipe.id}`}>
+                                    <RecipeCard
+                                      title={recipe.name}
+                                      imagePath={"./images/recipe-placeholder.png"}
+                                      description={recipe.description}
+                                      steps={recipe.steps}
+                                    />
+                                  </Link>
                             </Box>
                         ))}
                     </Item>
