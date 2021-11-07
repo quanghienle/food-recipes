@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import RecipeCard from "../components/RecipeCard";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -14,9 +15,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Home(){
+    const [topRatedRecipes, setTopRecipes] = React.useState([]);
+    React.useEffect(() => {
+        fetch('/home')
+        .then(res => res.json())
+        .then(data => {
+            setTopRecipes(data);
+        })
+    }, []);
+
     return (
         <Box sx={{ flexGrow: 1}}>
-            <Grid container spacing={4} direction='column'>
+            <Grid container spacing={4} >
                 <Grid item xs={12 }>
                     <Item>
                         to display background
@@ -24,11 +34,17 @@ export default function Home(){
                 </Grid>
                 <Grid item xs={12}>
                     <Item>
-                        to display top rated recipes <Link to="/recipes">Recipes</Link>
+                        <h1>Top rated recipes</h1>
+                        {topRatedRecipes.map(recipe => (
+                            <Link to={`/recipe/${recipe.id}`}>
+                                <RecipeCard recipe={recipe} />
+                            </Link>
+                        ))}
                     </Item>
                 </Grid>
                 <Grid item xs={12}>
                     <Item>
+                        <h1>Most popular cusines</h1>
                         to display popular cusines <Link to="/cusines">Cusines</Link>
                     </Item>
                 </Grid>
