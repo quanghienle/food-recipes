@@ -9,6 +9,22 @@ import {queryPromise} from './db_helper.js';
 
 const app = express();
 
+app.get('/home', (req, res) => {
+    const queryString = `SELECT AVG(rating) AS avg_rating, count(rating) AS num_ratings, recipes.description
+                        FROM recipe_reviews
+                        LEFT JOIN recipes ON recipes.id = recipe_reviews.recipe_id
+                        GROUP BY recipe_id
+                        ORDER BY avg_rating DESC, num_ratings DESC
+                        LIMIT 10`;
+    queryPromise(queryString)
+        .then((rows) => {
+            res.json(rows);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
+        
+
 app.get("/recipes",(req,res) => {
     const queryString = 'SELECT * FROM ?? LIMIT 10';    
     const queryVars = [dbTable.recipes];
@@ -37,6 +53,7 @@ app.get("/recipe", (req, res) =>{
       res.json(rows[0]);
     });
 });
+
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
