@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Home(){
     const [topRatedRecipes, setTopRecipes] = React.useState([]);
     React.useEffect(() => {
-        fetch('/recipes')
+        fetch('/home')
         .then(res => res.json())
         .then(data => {
             setTopRecipes(data);
@@ -36,15 +36,15 @@ export default function Home(){
                     <Item>
                         <h1>Top rated recipes</h1>
                         {topRatedRecipes.map(recipe => (
-                            <Box key={recipe.id}>
-                                  <Link to={`/recipe/${recipe.id}`}>
-                                    <RecipeCard
-                                      title={recipe.name}
-                                      imagePath={"./images/recipe-placeholder.png"}
-                                      description={recipe.description}
-                                      steps={recipe.steps}
-                                    />
-                                  </Link>
+                        <Box key={recipe.id}>
+                            <Link to={`/recipe/${recipe.id}`}>
+                                <RecipeCard
+                                    title={recipe.name}
+                                    imagePath={"./images/recipe-placeholder.png"}
+                                    description={recipe.description}
+                                    steps={recipe.steps}
+                                />
+                                </Link>
                             </Box>
                         ))}
                     </Item>
