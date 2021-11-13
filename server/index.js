@@ -54,6 +54,20 @@ app.get("/recipe", (req, res) =>{
     });
 });
 
+app.get("/reviews", (req, res) =>{
+  const recipeID = req.query.id;
+  const queryString = 
+        `SELECT R.*, U.first_name, U.last_name 
+        FROM ${dbTable.reviews} as R
+        LEFT JOIN ${dbTable.users} as U ON R.contributor_id = U.id
+        WHERE R.recipe_id= ${recipeID}
+        ORDER BY R.date DESC`;
+    console.log(queryString);
+  queryPromise(queryString)
+    .then((rows) => {
+      res.json(rows);
+    });
+});
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
