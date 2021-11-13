@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Home(){
     const [topRatedRecipes, setTopRecipes] = React.useState([]);
     React.useEffect(() => {
-        fetch('/home')
+        fetch('/topRatedRecipes')
         .then(res => res.json())
         .then(data => {
             setTopRecipes(data);
@@ -42,10 +42,11 @@ export default function Home(){
                                     title={recipe.name}
                                     imagePath={"./images/recipe-placeholder.png"}
                                     description={recipe.description}
-                                    steps={recipe.steps}
-                                />
-                                </Link>
-                            </Box>
+                                    rating={recipe.rating}
+                                >
+                                </RecipeCard>
+                            </Link>
+                        </Box>
                         ))}
                     </Item>
                 </Grid>

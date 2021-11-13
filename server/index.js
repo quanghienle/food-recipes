@@ -9,13 +9,13 @@ import {queryPromise} from './db_helper.js';
 
 const app = express();
 
-app.get('/home', (req, res) => {
-    const queryString = `SELECT AVG(rating) AS avg_rating, count(rating) AS num_ratings, recipes.description
+app.get('/topRatedRecipes', (req, res) => {
+    const queryString = `SELECT AVG(rating) AS avg_rating, count(rating) AS num_ratings, recipes.*
                         FROM recipe_reviews
                         LEFT JOIN recipes ON recipes.id = recipe_reviews.recipe_id
                         GROUP BY recipe_id
                         ORDER BY avg_rating DESC, num_ratings DESC
-                        LIMIT 10`;
+                        LIMIT 5`;
     queryPromise(queryString)
         .then((rows) => {
             res.json(rows);
