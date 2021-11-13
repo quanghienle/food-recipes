@@ -15,7 +15,7 @@ app.get('/topRatedRecipes', (req, res) => {
                         LEFT JOIN recipes ON recipes.id = recipe_reviews.recipe_id
                         GROUP BY recipe_id
                         ORDER BY avg_rating DESC, num_ratings DESC
-                        LIMIT 5`;
+                        LIMIT 8`;
     queryPromise(queryString)
         .then((rows) => {
             res.json(rows);
@@ -26,7 +26,7 @@ app.get('/topRatedRecipes', (req, res) => {
         
 
 app.get("/recipes",(req,res) => {
-    const queryString = 'SELECT * FROM ?? LIMIT 10';    
+    const queryString = 'SELECT * FROM ?? LIMIT 8';    
     const queryVars = [dbTable.recipes];
     queryPromise(queryString, queryVars)
         .then((rows) => {
