@@ -14,6 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import moment from "moment";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Link } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,7 +28,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeCard(props) {
-  const { title, imagePath, timestamp, description, steps } = props;
+  const { title, imagePath, timestamp, description, steps, recipeID} = props;
   const dateTimeString = moment.unix(timestamp).format("DD-MM-YYYY");
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,12 +53,14 @@ export default function RecipeCard(props) {
         title={title}
         subheader={dateTimeString}
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image={imagePath}
-        alt="Paella dish"
-      />
+      <Link to={`/recipe/${recipeID}`}>
+        <CardMedia
+          component="img"
+          height="194"
+          image={imagePath}
+          alt="Paella dish"
+        />
+      </Link>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {description}
