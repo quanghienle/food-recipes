@@ -25,7 +25,7 @@ export default function Home(){
                 <h2>Top Rated Recipes</h2>
                 <Grid container spacing={2}>
                     {topRatedRecipes.map(recipe => (
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <RecipeCard
                             timestamp={recipe.submitted}
                             recipeID={recipe.id}

@@ -4,11 +4,12 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
+import { Link } from "react-router-dom";
 
-export default function ImgList() {
-    
+export default function ImgList(props) {
+    const {title, imagePath} = props;
   return (
-    <ImageList sx={{ width: 500, height: 450 }}>
+    <ImageList sx={{ width: '100%', height: 350 }}>
       {itemData.map((item) => (
         <ImageListItem key={item.img}>
           <img
@@ -19,15 +20,6 @@ export default function ImgList() {
           />
           <ImageListItemBar
             title={item.title}
-            subtitle={item.author}
-            actionIcon={
-              <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                aria-label={`info about ${item.title}`}
-              >
-                <InfoIcon />
-              </IconButton>
-            }
           />
         </ImageListItem>
       ))}
