@@ -2,6 +2,7 @@ import React from "react";
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import RecipeCard from "../components/RecipeCard";
+import ImgList from "../components/ImgList";
 
 export default function Home(){
     const [topRatedRecipes, setTopRecipes] = React.useState([]);
@@ -38,6 +39,7 @@ export default function Home(){
             </Grid>
             <Grid item xs = {12}>
                 <h2>Popular Cusines</h2>
+                <ImgList></ImgList>
             </Grid>
         </Grid>
     );
