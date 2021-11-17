@@ -3,13 +3,7 @@ import React from "react";
 import RecipesPage from "./pages/RecipesPage";
 import RecipeDetail from "./pages/RecipeDetail";
 import Home from "./pages/Home";
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -21,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-function App() {
+export default function App() {
   const classes = useStyles();
   const redirectHome = () => <Redirect to="/home" />;
 
@@ -43,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+

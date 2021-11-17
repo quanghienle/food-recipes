@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "react-router-dom";
-import { style } from "@mui/system";
 
 export default function CuisineCard(props) {
     const {cuisineName, imagePath}= props;
