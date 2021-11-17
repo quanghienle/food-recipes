@@ -1,8 +1,7 @@
 import React from "react";
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import RecipeCard from "../components/RecipeCard";
-import ImgList from "../components/ImgList";
+import CuisineCard from "../components/CuisineCard";
 
 export default function Home(){
     const [topRatedRecipes, setTopRecipes] = React.useState([]);
@@ -14,12 +13,20 @@ export default function Home(){
         })
     }, []);
 
+    const [popularCusines, setPopularCusines] = React.useState([]);
+    React.useEffect(() => {
+        fetch('/cuisines')  
+        .then(res => res.json())
+        .then(data => {
+            setPopularCusines(data);
+        })
+    }, []);
+    
+    
     return (
         <Grid container spacing={3}>
             <Grid item xs = {12}>
-                <Paper>
-                    <img src="./images/background.png" alt="background" style={{width:'100%', height:'55vh'}} ></img>
-                </Paper>
+                <img src="./images/background.png" alt="background" style={{width:'100%', height:'55vh'}} ></img>
             </Grid>
             <Grid item xs = {12} >
                 <h2>Top Rated Recipes</h2>
@@ -39,7 +46,16 @@ export default function Home(){
             </Grid>
             <Grid item xs = {12}>
                 <h2>Popular Cusines</h2>
-                <ImgList></ImgList>
+                <Grid container spacing={2}>
+                    {popularCusines.map(cusine => (
+                    <Grid item xs={4}>
+                        <CuisineCard
+                            cuisineName={cusine.name}
+                            imagePath={"./images/recipe-placeholder.png"}>
+                        </CuisineCard>
+                    </Grid>       
+                    ))}
+                </Grid>
             </Grid>
         </Grid>
     );
