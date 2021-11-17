@@ -1,14 +1,11 @@
-// server/index.js
 import './init.js';
-
 import express from "express";
-
 import { dbTable } from './constants.js';
 import {queryPromise} from './db_helper.js';
 
-
 const app = express();
 
+//return 8 top rated recipes
 app.get('/topRatedRecipes', (req, res) => {
     const queryString = `SELECT AVG(rating) AS avg_rating, count(rating) AS num_ratings, recipes.*
                         FROM recipe_reviews
@@ -24,11 +21,11 @@ app.get('/topRatedRecipes', (req, res) => {
         });
 });
         
+//Return 6 popular cuisines
 app.get('/cuisines', (req, res) => {
     const queryString = `SELECT * FROM tags
                               WHERE name 
                               IN ('korean','mexican','thai','french','italian','american')`;
-    
     queryPromise(queryString)
         .then((rows) => {
             res.json(rows);
@@ -37,8 +34,15 @@ app.get('/cuisines', (req, res) => {
         });
 });
 
+// app.get("/cuisine", (req, res) => {
+//     const cuisine = req.query.cuisine;
+  
+    
 
+//     ));
+// });
 
+//Return first recipes
 app.get("/recipes",(req,res) => {
     const queryString = 'SELECT * FROM ?? LIMIT 8';    
     const queryVars = [dbTable.recipes];
@@ -50,15 +54,8 @@ app.get("/recipes",(req,res) => {
         });
 });
 
-app.get("/ingredients", (req, res) =>{
-  const queryString = 'SELECT * FROM ?? LIMIT 100';
-  const queryVars = [dbTable.ingredients];
-  queryPromise(queryString,queryVars)
-    .then((rows) => {
-      res.json(rows);
-    });
-});
 
+//Return recipe that matches ID
 app.get("/recipe", (req, res) =>{
   const recipeID = req.query.id;
   const queryString = `SELECT * FROM ${dbTable.recipes} WHERE id= ${recipeID}`;
@@ -68,6 +65,7 @@ app.get("/recipe", (req, res) =>{
     });
 });
 
+//
 app.get("/reviews", (req, res) =>{
   const recipeID = req.query.id;
   const queryString = 
