@@ -58,7 +58,7 @@ export default function RecipeCard(props) {
           component="img"
           height="194"
           image={imagePath}
-          alt="Paella dish"
+          alt="Image"
         />
       </Link>
       <CardContent>
