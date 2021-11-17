@@ -24,6 +24,20 @@ app.get('/topRatedRecipes', (req, res) => {
         });
 });
         
+app.get('/cuisines', (req, res) => {
+    const queryString = `SELECT * FROM tags
+                              WHERE name 
+                              IN ('korean','mexican','thai','french','italian','american')`;
+    
+    queryPromise(queryString)
+        .then((rows) => {
+            res.json(rows);
+        }).catch((err) => {
+            console.log(err);
+        });
+});
+
+
 
 app.get("/recipes",(req,res) => {
     const queryString = 'SELECT * FROM ?? LIMIT 8';    
@@ -62,7 +76,6 @@ app.get("/reviews", (req, res) =>{
         LEFT JOIN ${dbTable.users} as U ON R.contributor_id = U.id
         WHERE R.recipe_id= ${recipeID}
         ORDER BY R.date DESC`;
-    console.log(queryString);
   queryPromise(queryString)
     .then((rows) => {
       res.json(rows);
