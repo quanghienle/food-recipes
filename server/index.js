@@ -24,23 +24,41 @@ app.get('/topRatedRecipes', (req, res) => {
 //Return 6 popular cuisines
 app.get('/cuisines', (req, res) => {
     const queryString = `SELECT * FROM tags
-                              WHERE name 
-                              IN ('korean','mexican','thai','french','italian','american')`;
+                          WHERE name 
+                          IN ('korean','mexican','thai','french','italian','american')`;
     queryPromise(queryString)
         .then((rows) => {
-            res.json(rows);
+          res.json(rows);
         }).catch((err) => {
-            console.log(err);
+          console.log(err);
         });
 });
 
-// app.get("/cuisine", (req, res) => {
-//     const cuisine = req.query.cuisine;
-  
+app.get("/cuisine", (req, res) => {
+    const cuisine = req.query.cuisine;
+    const queryString = `SELECT *
+                        FROM recipes
+                        LEFT JOIN recipe_tag_mappings ON recipes.id = recipe_tag_mappings.recipe_id
+                        LEFT JOIN tags ON recipe_tag_mappings.tag_id = tags.id
+                        WHERE tags.name = ${cuisine}`;
     
+    queryPromise(queryString)
+      .then((rows) => {
+        res.json(rows);
+      }).catch((err) => {
+        console.log(err);
+      });
+});
 
-//     ));
-// });
+//Return recipe that matches ID
+app.get("/recipe", (req, res) =>{
+  const recipeID = req.query.id;
+  const queryString = `SELECT * FROM ${dbTable.recipes} WHERE id= ${recipeID}`;
+  queryPromise(queryString)
+    .then((rows) => {
+      res.json(rows[0]);
+    });
+});
 
 //Return first recipes
 app.get("/recipes",(req,res) => {
@@ -54,18 +72,7 @@ app.get("/recipes",(req,res) => {
         });
 });
 
-
-//Return recipe that matches ID
-app.get("/recipe", (req, res) =>{
-  const recipeID = req.query.id;
-  const queryString = `SELECT * FROM ${dbTable.recipes} WHERE id= ${recipeID}`;
-  queryPromise(queryString)
-    .then((rows) => {
-      res.json(rows[0]);
-    });
-});
-
-//
+//return all reviews for a recipe
 app.get("/reviews", (req, res) =>{
   const recipeID = req.query.id;
   const queryString = 
@@ -87,7 +94,6 @@ app.get("/api", (req, res) => {
 app.get("/", (req, res) => {
   res.json("Hello from server!");
 });
-
 
 
 const PORT = process.env.SERVER_PORT || 3001;
