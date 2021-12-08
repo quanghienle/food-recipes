@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import RecipeCard from "../components/RecipeCard";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function CuisinePage() {
     const [cuisineRecipes, setCuisineRecipes] = React.useState([]);
@@ -26,8 +27,17 @@ export default function CuisinePage() {
                 bgcolor: "background.paper",
             }}
         >
-
-
+            {cuisineRecipes.map((recipe) => (
+                <Box sx={{ p: 1, flexGrow: 1 }} key={`recipe-preview-${recipe.id}`}>
+                    <Link to={`/recipe/${recipe.id}`}>
+                        <RecipeCard 
+                            recipe={recipe.name} 
+                            imagePath={"./images/recipe-placeholder.png"}
+                            description={recipe.description}
+                        />
+                    </Link>
+                </Box>
+            ))}    
         </Box>
     );
 

@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import CuisinePage from "./pages/CuisinePage";
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +35,7 @@ export default function App() {
             <Route exact path="/home" component={withRouter(Home)} />
             <Route exact path="/recipes" component={withRouter(RecipesPage)} />
             <Route path="/recipe/:id" component={withRouter(RecipeDetail)} />
+            <Route path="/cuisine/:name" component={withRouter(CuisinePage)} />
           </Switch>
         </BrowserRouter>
       </div>

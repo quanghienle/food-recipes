@@ -28,6 +28,7 @@ app.get('/cuisines', (req, res) => {
                           IN ('korean','mexican','thai','french','italian','american')`;
     queryPromise(queryString)
         .then((rows) => {
+          
           res.json(rows);
         }).catch((err) => {
           console.log(err);
@@ -36,11 +37,12 @@ app.get('/cuisines', (req, res) => {
 
 app.get("/cuisine", (req, res) => {
     const cuisine = req.query.cuisine;
-    const queryString = `SELECT *
+    const queryString = `SELECT recipes.*, tags.name AS cuisine
                         FROM recipes
                         LEFT JOIN recipe_tag_mappings ON recipes.id = recipe_tag_mappings.recipe_id
                         LEFT JOIN tags ON recipe_tag_mappings.tag_id = tags.id
-                        WHERE tags.name = ${cuisine}`;
+                        WHERE tags.name = '${cuisine}'
+                        LIMIT 20`;
     
     queryPromise(queryString)
       .then((rows) => {
