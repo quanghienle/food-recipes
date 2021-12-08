@@ -21,8 +21,8 @@ app.get('/topRatedRecipes', (req, res) => {
         });
 });
         
-//Return 6 popular cuisines
-app.get('/cuisines', (req, res) => {
+//Return 6 popular cuisine names
+app.get('/PopularCuisines', (req, res) => {
     const queryString = `SELECT * FROM tags
                           WHERE name 
                           IN ('korean','mexican','thai','french','italian','american')`;
@@ -35,6 +35,7 @@ app.get('/cuisines', (req, res) => {
         });
 });
 
+//Return recipes with the given cuisine
 app.get("/cuisine", (req, res) => {
     const cuisine = req.query.cuisine;
     const queryString = `SELECT recipes.*, tags.name AS cuisine

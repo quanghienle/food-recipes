@@ -15,7 +15,7 @@ export default function Home(){
 
     const [popularCusines, setPopularCusines] = React.useState([]);
     React.useEffect(() => {
-        fetch('/cuisines')  
+        fetch('/PopularCuisines')  
         .then(res => res.json())
         .then(data => {
             setPopularCusines(data);
@@ -47,10 +47,10 @@ export default function Home(){
             <Grid item xs = {12}>
                 <h2>Popular Cusines</h2>
                 <Grid container spacing={2}>
-                    {popularCusines.map(cusine => (
+                    {popularCusines.map(cuisine => (
                     <Grid item xs={4}>
                         <CuisineCard
-                            cuisineName={cusine.name}
+                            cuisineName={cuisine.name}
                             imagePath={"./images/recipe-placeholder.png"}>
                         </CuisineCard>
                     </Grid>       

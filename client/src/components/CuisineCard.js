@@ -13,7 +13,7 @@ export default function CuisineCard(props) {
                 style={{ textTransform: "capitalize" }}
                 title={cuisineName }
             />
-            <Link to={`/cuisines/${cuisineName}`}>
+            <Link to={`/cuisine/${cuisineName}`}>
                 <CardMedia
                 component="img"
                 height="194"

@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 
 export default function CuisinePage() {
     const [cuisineRecipes, setCuisineRecipes] = React.useState([]);
-
+    const { cuisine} = useParams();
     React.useEffect(() => {
-        fetch("/cuisine")
+        fetch(`/cuisine=?cuisine=${cuisine}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
