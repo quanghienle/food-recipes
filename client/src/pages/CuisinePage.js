@@ -13,7 +13,6 @@ export default function CuisinePage() {
         fetch(`/cuisine?cuisine=${name}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 setCuisineRecipes(data);
             });
     });
