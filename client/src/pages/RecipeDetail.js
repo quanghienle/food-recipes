@@ -4,6 +4,7 @@ import { Paper, Grid } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import moment from "moment";
 import { useParams } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -31,7 +32,7 @@ export default function RecipeDetail() {
         setReviews(data);
         console.log(data);
       });
-  }, []);
+  });
 
   function splitSteps(steps) {
     steps = steps || "";
@@ -44,6 +45,9 @@ export default function RecipeDetail() {
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <NavBar />
+      </Grid>
       <Grid item xs={5}>
         <Paper variant="outlined" style={{ height: "100%" }}>
           <img

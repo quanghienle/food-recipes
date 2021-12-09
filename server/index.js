@@ -22,13 +22,12 @@ app.get('/topRatedRecipes', (req, res) => {
 });
         
 //Return 6 popular cuisine names
-app.get('/PopularCuisines', (req, res) => {
+app.get('/popularCuisines', (req, res) => {
     const queryString = `SELECT * FROM tags
                           WHERE name 
                           IN ('korean','mexican','thai','french','italian','american')`;
     queryPromise(queryString)
         .then((rows) => {
-          
           res.json(rows);
         }).catch((err) => {
           console.log(err);
@@ -44,7 +43,6 @@ app.get("/cuisine", (req, res) => {
                         LEFT JOIN tags ON recipe_tag_mappings.tag_id = tags.id
                         WHERE tags.name = '${cuisine}'
                         LIMIT 20`;
-    
     queryPromise(queryString)
       .then((rows) => {
         res.json(rows);
@@ -90,15 +88,11 @@ app.get("/reviews", (req, res) =>{
     });
 });
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
+// app.get("/signin", (req, res) => {
+// });
 
-app.get("/", (req, res) => {
-  res.json("Hello from server!");
-});
-
-
+// app.get("/signup", (req, res) => {
+// });
 const PORT = process.env.SERVER_PORT || 3001;
 
 app.listen(PORT, () => {

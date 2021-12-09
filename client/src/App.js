@@ -1,6 +1,4 @@
-import NavBar from "./components/NavBar";
 import React from "react";
-import RecipesPage from "./pages/RecipesPage";
 import RecipeDetail from "./pages/RecipeDetail";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -24,8 +22,6 @@ export default function App() {
 
   return (
     <div className={classes.root}>
-      <NavBar />
-
       <div className={classes.container}>
         <BrowserRouter>
           <Switch>
@@ -33,7 +29,6 @@ export default function App() {
             <Route exact path="/signup" component={withRouter(SignUp)} />
             <Route exact path="/" render={redirectHome} />
             <Route exact path="/home" component={withRouter(Home)} />
-            <Route exact path="/recipes" component={withRouter(RecipesPage)} />
             <Route path="/recipe/:id" component={withRouter(RecipeDetail)} />
             <Route path="/cuisine/:name" component={withRouter(CuisinePage)} />
           </Switch>

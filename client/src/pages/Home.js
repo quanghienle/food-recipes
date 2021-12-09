@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
+import NavBar from "../components/NavBar";       
 import RecipeCard from "../components/RecipeCard";
 import CuisineCard from "../components/CuisineCard";
 
@@ -15,7 +16,7 @@ export default function Home(){
 
     const [popularCusines, setPopularCusines] = React.useState([]);
     React.useEffect(() => {
-        fetch('/PopularCuisines')  
+        fetch('/popularCuisines')  
         .then(res => res.json())
         .then(data => {
             setPopularCusines(data);
@@ -25,6 +26,7 @@ export default function Home(){
     
     return (
         <Grid container spacing={3}>
+            <NavBar />
             <Grid item xs = {12}>
                 <img src="./images/background.png" alt="background" style={{width:'100%', height:'55vh'}} ></img>
             </Grid>
