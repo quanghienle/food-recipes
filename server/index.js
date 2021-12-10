@@ -91,7 +91,6 @@ app.get("/reviews", (req, res) =>{
 });
 
 app.post("/signin", (req, res) => {
-  
   const email = req.body.email;
   const password = req.body.password;
   
@@ -110,8 +109,22 @@ app.post("/signin", (req, res) => {
     });
 });
 
-// app.get("/signup", (req, res) => {
-// });
+app.post("/signup", (req, res) => {
+  const firstName = req.body.firstname;
+  const lastName = req.body.lastname;
+  const email = req.body.email;
+  const password = req.body.password;
+  
+  const queryString = `INSERT INTO ${dbTable.users} (id, first_name, last_name, email, username ,password, date, role)
+                          VALUES ('${firstName}', '${lastName}', '${email}', '${password}')`;
+  queryPromise(queryString)
+    .then((rows) => {
+      res.json({
+        success: "User created successfully"
+      });
+    });
+});
+
 const PORT = process.env.SERVER_PORT || 3001;
 
 app.listen(PORT, () => {

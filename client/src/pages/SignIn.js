@@ -18,22 +18,22 @@ export default function SignIn() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({email: data.get('email'), password: data.get('password')})
-    };
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({email: data.get('email'), password: data.get('password')})
+        };
 
-    fetch('/signin', requestOptions)
-        .then(res => res.json())
-        .then(data => {
-            if (data.username !== undefined) {
-                window.location.href = '/home';
-            } else {
-                alert("Invalid email or password");
-            }
-            
-        })};
+        fetch('/signin', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                if (data.username !== undefined) {
+                    window.location.href = '/home';
+                } else {
+                    alert("Invalid email or password");
+                }
+            });
+    };
 
     return (
         <ThemeProvider theme={theme}>

@@ -3,8 +3,6 @@
     import Button from '@mui/material/Button';
     import CssBaseline from '@mui/material/CssBaseline';
     import TextField from '@mui/material/TextField';
-    import FormControlLabel from '@mui/material/FormControlLabel';
-    import Checkbox from '@mui/material/Checkbox';
     import Link from '@mui/material/Link';
     import Grid from '@mui/material/Grid';
     import Box from '@mui/material/Box';
@@ -16,14 +14,28 @@
     const theme = createTheme();
 
     export default function SignUp() {
-    const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+        const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({firstname: data.get('firstName'),lastname: data.get('lastName'),
+                                    email: data.get('email'),password: data.get('password')})  
+        };
     
-    console.log({
-    email: data.get('email'),
-    password: data.get('password'),
-    });
+        fetch('/signup', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                if(data.success){
+                    alert("Sign up successful");
+                    window.location.href = "/login";
+                }
+                else{
+                    alert("Sign up failed");
+                }
+            })
     };
 
     return (
@@ -88,27 +100,21 @@
                 autoComplete="new-password"
                 />
             </Grid>
-            <Grid item xs={12}>
-                <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-                />
             </Grid>
-            </Grid>
-            <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            >
-            Sign Up
-            </Button>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Sign Up
+                </Button>
             <Grid container justifyContent="flex-end">
-            <Grid item>
-                <Link href="#" variant="body2">
-                Already have an account? Sign in
-                </Link>
-            </Grid>
+                <Grid item>
+                    <Link href="/signin" variant="body2">
+                        Already have an account? Sign in
+                    </Link>
+                </Grid>
             </Grid>
         </Box>
         </Box>
