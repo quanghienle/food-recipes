@@ -10,18 +10,30 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 const theme = createTheme();
 
 export default function SignIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        });
+        
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({email: data.get('email'), password: data.get('password')})
     };
+
+    fetch('/signin', requestOptions)
+        .then(res => res.json())
+        .then(data => {
+            if (data.username !== undefined) {
+                window.location.href = '/home';
+            } else {
+                alert("Invalid email or password");
+            }
+            
+        })};
 
     return (
         <ThemeProvider theme={theme}>

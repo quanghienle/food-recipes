@@ -2,8 +2,10 @@ import './init.js';
 import express from "express";
 import { dbTable } from './constants.js';
 import {queryPromise} from './db_helper.js';
+import bodyParser from 'body-parser';
 
 const app = express();
+app.use(bodyParser.json());
 
 //return 8 top rated recipes
 app.get('/topRatedRecipes', (req, res) => {
@@ -88,8 +90,25 @@ app.get("/reviews", (req, res) =>{
     });
 });
 
-// app.get("/signin", (req, res) => {
-// });
+app.post("/signin", (req, res) => {
+  
+  const email = req.body.email;
+  const password = req.body.password;
+  
+  const queryString = `SELECT * FROM ${dbTable.users} 
+                        WHERE email = '${email}' 
+                        AND password = '${password}'`;
+  queryPromise(queryString)
+    .then((rows) => {
+      if (rows.length > 0) {
+        res.json(rows[0]);
+      } else {
+        res.json({
+          error: "Invalid email or password"
+        });
+      }
+    });
+});
 
 // app.get("/signup", (req, res) => {
 // });
