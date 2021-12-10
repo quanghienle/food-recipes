@@ -38,6 +38,7 @@ export default function CuisinePage() {
                         <Link to={`/recipe/${recipe.id}`}>
                             <RecipeCard 
                                 recipe={recipe.name} 
+                                timestamp={recipe.submitted}
                                 imagePath={"./images/recipe-placeholder.png"}
                                 description={recipe.description}
                             />
