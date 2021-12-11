@@ -23,10 +23,18 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 export default function NavBar() {
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+    const inputOnChange = function(e) {
+        setSearchTerm(e.target.value);
+        console.log(searchTerm);
+    }
+
   const handleSearch = (event) =>{
     const data= new FormData(event.currentTarget);
     
     event.preventDefault();
+    console.log(event);
     
   };
 
@@ -49,6 +57,8 @@ export default function NavBar() {
               id="search"
               label="Search"
               name="search"
+              onChange={inputOnChange}
+    
             />
             <Button 
               type="submit"
