@@ -24,6 +24,9 @@ const Search = styled('div')(({ theme }) => ({
 
 export default function NavBar() {
   const [searchTerm, setSearchTerm] = React.useState('');
+    //   /search/:type/:searchTerm
+    //   /search/tag/korean
+    //   /sear
 
     const inputOnChange = function(e) {
         setSearchTerm(e.target.value);

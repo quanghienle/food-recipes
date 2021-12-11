@@ -31,6 +31,8 @@ export default function App() {
             <Route exact path="/home" component={withRouter(Home)} />
             <Route path="/recipe/:id" component={withRouter(RecipeDetail)} />
             <Route path="/cuisine/:name" component={withRouter(CuisinePage)} />
+            // TODO: make search result page
+            <Route path="/search/:type/:searchTerm" component={withRouter(CuisinePage)} />
           </Switch>
         </BrowserRouter>
       </div>
