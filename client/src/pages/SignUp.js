@@ -30,7 +30,7 @@
             .then(data => {
                 if(data.success){
                     alert("Sign up successful");
-                    window.location.href = "/login";
+                    window.location.href = "/signin";
                 }
                 else{
                     alert("Sign up failed");

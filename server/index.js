@@ -4,6 +4,7 @@ import { dbTable } from './constants.js';
 import {queryPromise} from './db_helper.js';
 import bodyParser from 'body-parser';
 
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -114,15 +115,27 @@ app.post("/signup", (req, res) => {
   const lastName = req.body.lastname;
   const email = req.body.email;
   const password = req.body.password;
-  
-  const queryString = `INSERT INTO ${dbTable.users} (id, first_name, last_name, email, username ,password, date, role)
-                          VALUES ('${firstName}', '${lastName}', '${email}', '${password}')`;
-  queryPromise(queryString)
-    .then((rows) => {
-      res.json({
-        success: "User created successfully"
-      });
-    });
+  const day = Math.round(new Date().getTime()/1000);
+
+  const checkIdentity = `SELECT * FROM ${dbTable.users} 
+                          WHERE email = '${email}'`;
+
+  const queryString = `INSERT INTO ${dbTable.users} (id ,first_name, last_name, email, username ,password, date, role)
+                        VALUES ('0', '${firstName}', '${lastName}', '${email}', '${firstName}','${password}', '${day}' ,'user')`;
+
+  queryPromise(checkIdentity)
+  .then((rows)=>{
+      if(rows.length>0){
+        error: "Email existed"
+      }else{
+        queryPromise(queryString)
+        .then((rows) =>{
+          res.json({
+            success: "success"
+          })
+        })
+    }
+  })
 });
 
 const PORT = process.env.SERVER_PORT || 3001;
