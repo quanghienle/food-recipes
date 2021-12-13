@@ -4,7 +4,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
 import { TextField } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
@@ -45,11 +45,9 @@ export default function NavBar() {
               label="Search"
               name="search"
               onChange={inputOnChange}
-    
             />
-            <Link to={`/search?=${searchTerm}`}>
+            <Link to={`/search/${searchTerm}`}>
               <Button 
-                type="submit"
                 variant="contained"             
                 sx={{ mt: 1, mb: 1, height: '100%' }}
               >
