@@ -4,6 +4,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import { TextField } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
@@ -24,14 +25,14 @@ const Search = styled('div')(({ theme }) => ({
 
 export default function NavBar() {
   const [searchTerm, setSearchTerm] = React.useState('');
-    //   /search/:type/:searchTerm
-    //   /search/tag/korean
-    //   /sear
+  const inputOnChange = function(e) {
+    setSearchTerm(e.target.value);
+    console.log(e.target.value);
+  };
 
-    const inputOnChange = function(e) {
-        setSearchTerm(e.target.value);
-        console.log(searchTerm);
-    }
+  React.useEffect(() => {
+    fetch(`/search?=${searchTerm}`)
+  });
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -49,13 +50,15 @@ export default function NavBar() {
               onChange={inputOnChange}
     
             />
-            <Button 
-              type="submit"
-              variant="contained"             
-              sx={{ mt: 1, mb: 1, height: '100%' }}
-            >
-              Search
-            </Button>
+            <Link to={`/search?=${searchTerm}`}>
+              <Button 
+                type="submit"
+                variant="contained"             
+                sx={{ mt: 1, mb: 1, height: '100%' }}
+              >
+                Search
+              </Button>
+            </Link>
           </Search>
         </Toolbar>
       </AppBar>

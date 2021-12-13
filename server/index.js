@@ -91,6 +91,18 @@ app.get("/reviews", (req, res) =>{
     });
 });
 
+//Get recipes that contain name
+app.get("/search", (req, res) => {
+  const queryString = `SELECT * FROM ${dbTable.recipes} 
+                      WHERE name LIKE '%${req.query.search}%'`;
+  queryPromise(queryString)
+      .then((rows) => { 
+          res.json(rows);
+      }).catch((err) => { 
+          console.log(err);
+      });
+});
+
 app.post("/signin", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
