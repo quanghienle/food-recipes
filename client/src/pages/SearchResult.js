@@ -9,7 +9,7 @@ export default function SearchResult() {
     const [recipes, setRecipes] = React.useState([]);  
     const { searchTerm } = useParams();
     React.useEffect(() => {
-        fetch(`/search?search=${searchTerm}`)
+        fetch(`/search?=${searchTerm}`)
         .then(res => res.json())
         .then(data => { 
             setRecipes(data);

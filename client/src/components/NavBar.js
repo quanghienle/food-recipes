@@ -30,9 +30,6 @@ export default function NavBar() {
     console.log(e.target.value);
   };
 
-  React.useEffect(() => {
-    fetch(`/search?=${searchTerm}`)
-  });
 
   return (
     <Box sx={{ flexGrow: 1 }}>
