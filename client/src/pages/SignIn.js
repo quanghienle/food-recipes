@@ -21,7 +21,8 @@ export default function SignIn() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({email: data.get('email'), password: data.get('password')})
+            body: JSON.stringify({email: data.get('email'),
+                                password: data.get('password')})
         };
 
         fetch('/signin', requestOptions)

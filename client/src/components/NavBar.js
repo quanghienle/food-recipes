@@ -33,28 +33,14 @@ export default function NavBar() {
         console.log(searchTerm);
     }
 
-  const handleSearch = (event) =>{
-    const data= new FormData(event.currentTarget);
-    
-    event.preventDefault();
-    console.log(event);
-    
-  };
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <h1
-            variant="h6"
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
+          <h1>
             <a href="/home">FoodForFun</a>
           </h1>
-          <Search
-            component="form" onSubmit={handleSearch} noValidate sx={{ mt: 1 }}
-          >
+          <Search>
             <TextField
               margin="normal"
               id="search"
@@ -66,7 +52,7 @@ export default function NavBar() {
             <Button 
               type="submit"
               variant="contained"             
-              sx={{ mt: 1, mb: 1 }}
+              sx={{ mt: 1, mb: 1, height: '100%' }}
             >
               Search
             </Button>

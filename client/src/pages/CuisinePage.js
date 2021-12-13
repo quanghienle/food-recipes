@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 import Box from "@mui/material/Box";
 import RecipeCard from "../components/RecipeCard";
 import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function CuisinePage() {
@@ -35,14 +34,13 @@ export default function CuisinePage() {
             >
                 {cuisineRecipes.map((recipe) => (
                     <Box sx={{ p: 1, flexGrow: 1 }} key={`recipe-preview-${recipe.id}`}>
-                        <Link to={`/recipe/${recipe.id}`}>
-                            <RecipeCard 
-                                recipe={recipe.name} 
-                                timestamp={recipe.submitted}
-                                imagePath={"./images/recipe-placeholder.png"}
-                                description={recipe.description}
-                            />
-                        </Link>
+                        <RecipeCard 
+                            recipe={recipe.name} 
+                            recipeID={recipe.id}
+                            timestamp={recipe.submitted}
+                            imagePath={"/images/recipe-placeholder.png"}
+                            description={recipe.description}
+                        />
                     </Box>
                 ))}    
             </Box>

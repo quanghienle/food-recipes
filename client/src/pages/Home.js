@@ -23,12 +23,15 @@ export default function Home(){
         })
     }, []);
     
-    
     return (
         <Grid container spacing={3}>
             <NavBar />
             <Grid item xs = {12}>
-                <img src="./images/background.png" alt="background" style={{width:'100%', height:'55vh'}} ></img>
+                <img src="./images/background.png" 
+                    alt="background" 
+                    style={{width:'100%', height:'55vh'}}
+                    max-width={'100%'}
+                    height={'auto'}></img>
             </Grid>
             <Grid item xs = {12} >
                 <h2>Top Rated Recipes</h2>

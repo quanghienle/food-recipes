@@ -1,4 +1,3 @@
-
 function queryPromise(queryString, queryVars=[]) {
     return new Promise( (resolve, reject) => {
         dbPool.getConnection(function(err, connection) {

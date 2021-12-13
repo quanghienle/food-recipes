@@ -4,8 +4,8 @@ import { dbTable } from './constants.js';
 import {queryPromise} from './db_helper.js';
 import bodyParser from 'body-parser';
 
-
 const app = express();
+
 app.use(bodyParser.json());
 
 //return 8 top rated recipes
@@ -91,8 +91,6 @@ app.get("/reviews", (req, res) =>{
     });
 });
 
-
-
 app.post("/signin", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -141,7 +139,6 @@ app.post("/signup", (req, res) => {
 });
 
 const PORT = process.env.SERVER_PORT || 3001;
-
 app.listen(PORT, () => {
   console.log(`Server listening on ${process.env.SERVER_PORT || 3001}`);
 });

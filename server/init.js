@@ -1,9 +1,8 @@
 
 import dotenv from 'dotenv';
-dotenv.config();
-
 import mysql from 'mysql';
 
+dotenv.config();
 const dbPool = mysql.createPool({
   connectionLimit : 20, //important
   host: process.env.DB_HOST,
@@ -11,5 +10,4 @@ const dbPool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_SCHEMA
 });
-
 global.dbPool = dbPool;
