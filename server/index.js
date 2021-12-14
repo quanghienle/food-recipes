@@ -91,9 +91,24 @@ app.get("/reviews", (req, res) =>{
     });
 });
 
+//Return ingredients for a recipe
+app.get("/ingredients", (req, res) =>{
+  const recipeID = req.query.id;  
+  const queryString = `SELECT recipes.id as id, recipes.name, ingredients.name
+                        FROM recipes
+                        LEFT JOIN recipe_ingredient_mappings ON recipe_id = recipes.id
+                        LEFT JOIN ingredients ON recipe_ingredient_mappings.ingredient_id = ingredients.id
+                        WHERE recipes.id= ${recipeID}`;
+  queryPromise(queryString)
+    .then((rows) => {
+      res.json(rows);
+    }).catch((err) => {
+      console.log(err);
+    });
+});
+
 //Get recipes that contain name
 app.get("/search", (req, res) => {
-  console.log(req.query);
   const queryString = `SELECT * FROM ${dbTable.recipes} 
                       WHERE name LIKE '%${req.query.search}%'
                       LIMIT 20`;
@@ -105,6 +120,7 @@ app.get("/search", (req, res) => {
       });
 });
 
+//Checking user's login credentials
 app.post("/signin", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -124,6 +140,7 @@ app.post("/signin", (req, res) => {
     });
 });
 
+//Create a new user
 app.post("/signup", (req, res) => {
   const firstName = req.body.firstname;
   const lastName = req.body.lastname;

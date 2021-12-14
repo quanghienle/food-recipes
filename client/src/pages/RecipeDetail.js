@@ -16,6 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function RecipeDetail() {
   const [recipeData, setRecipeData] = React.useState({});
   const [reviews, setReviews] = React.useState([]);
+  const [ingredients, setIngredients] = React.useState([]);
   const { id } = useParams();
 
   React.useEffect(() => {
@@ -23,16 +24,22 @@ export default function RecipeDetail() {
       .then((res) => res.json())
       .then((data) => {
         setRecipeData(data);
-        console.log(data);
       });
 
     fetch(`/reviews?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
+      });
+
+    fetch(`/ingredients?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setIngredients(data);
         console.log(data);
       });
   });
+
 
   function splitSteps(steps) {
     steps = steps || "";
@@ -70,6 +77,9 @@ export default function RecipeDetail() {
             ))}
           </ul>
         </Item>
+      </Grid>
+      <Grid item xs={12}>
+              
       </Grid>
       <Grid item xs={12}>
         <h2>Reviews: </h2>
