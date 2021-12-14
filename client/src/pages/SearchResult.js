@@ -9,7 +9,7 @@ export default function SearchResult() {
     const [recipes, setRecipes] = React.useState([]);  
     const { searchTerm } = useParams();
     React.useEffect(() => {
-        fetch(`/search?=${searchTerm}`)
+        fetch(`/search?search=${searchTerm}`)
         .then(res => res.json())
         .then(data => { 
             setRecipes(data);
@@ -20,7 +20,7 @@ export default function SearchResult() {
             <Grid item xs={12}>
                 <NavBar/>
             </Grid>
-            <h1> Seach Result </h1>
+                <h1> First 20 Results </h1>
             <Box
                 sx={{
                     display: "flex",
@@ -32,7 +32,7 @@ export default function SearchResult() {
                 }}
             >
                 {recipes.map((recipe) => (
-                    <Box sx={{ p: 1, flexGrow: 1 }} key={`recipe-preview-${recipe.id}`}>
+                    <Box sx={{ p: 1, flexGrow: 1 }}>
                         <RecipeCard 
                             recipe={recipe.name} 
                             recipeID={recipe.id}

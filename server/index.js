@@ -93,8 +93,10 @@ app.get("/reviews", (req, res) =>{
 
 //Get recipes that contain name
 app.get("/search", (req, res) => {
+  console.log(req.query);
   const queryString = `SELECT * FROM ${dbTable.recipes} 
-                      WHERE name LIKE '%${req.query.search}%'`;
+                      WHERE name LIKE '%${req.query.search}%'
+                      LIMIT 20`;
   queryPromise(queryString)
       .then((rows) => { 
           res.json(rows);
