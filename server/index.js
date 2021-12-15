@@ -94,10 +94,10 @@ app.get("/reviews", (req, res) =>{
 //Return ingredients for a recipe
 app.get("/ingredients", (req, res) =>{
   const recipeID = req.query.id;  
-  const queryString = `SELECT recipes.id as id, recipes.name, ingredients.name
+  const queryString = `SELECT recipes.id, recipes.name, ingredients.name
                         FROM recipes
                         LEFT JOIN recipe_ingredient_mappings ON recipe_id = recipes.id
-                        LEFT JOIN ingredients ON recipe_ingredient_mappings.ingredient_id = ingredients.id
+                        LEFT JOIN ingredients ON recipe_ingredient_mappings.ingrdient_id = ingredients.id
                         WHERE recipes.id= ${recipeID}`;
   queryPromise(queryString)
     .then((rows) => {

@@ -37,7 +37,7 @@ export default function Home(){
                 <h2>Top Rated Recipes</h2>
                 <Grid container spacing={2}>
                     {topRatedRecipes.map(recipe => (
-                    <Grid item xs={3}>
+                    <Grid item xs={3} key = {`recipes-${recipe.id}`}>
                         <RecipeCard
                             timestamp={recipe.submitted}
                             recipeID={recipe.id}
@@ -53,7 +53,7 @@ export default function Home(){
                 <h2>Popular Cusines</h2>
                 <Grid container spacing={2}>
                     {popularCusines.map(cuisine => (
-                    <Grid item xs={4}>
+                    <Grid item xs={4} key ={`cuisine-${cuisine.id}`}>
                         <CuisineCard
                             cuisineName={cuisine.name}
                             imagePath={"./images/recipe-placeholder.png"}>
